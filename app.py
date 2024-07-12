@@ -73,10 +73,18 @@ def main():
     """
         st.markdown(description)
 
-    services = ["AI Tools Development", "Technology Consulting", "Project Management"]
-    st.write("### Services Offered")
-    for service in services:
-        st.write(f"- {service}")
+    col1,col2 = st.columns(2)
+    with col1:
+        services = ["AI Tools Development", "Technology Consulting", "Project Management"]
+        st.write("### Services Offered")
+        for service in services:
+            st.write(f"- {service}")
+
+    with col2:
+        projects = ["AI_Medicare", "Raptor_eye", "Botarmy_Hub"]
+        st.write ('### Developed projects')
+        for project in projects:
+            st.write(f"- {project}")
 
     st.write("### Chat with Me, know me and let´s contact!")
     st.info("Doesn´t matter the language,ask anything you need!")
