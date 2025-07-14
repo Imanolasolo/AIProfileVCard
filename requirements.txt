@@ -6,3 +6,4 @@ openai
 tiktoken
 langchain-chroma
 faiss-cpu
+langchain-openai
