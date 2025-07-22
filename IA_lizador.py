@@ -81,15 +81,12 @@ def main():
     with col1:
         lang = st.radio("Idioma / Language", ("Español", "English"))
     with col2:
-        
         st.header(name)
     with col3:
         if lang == "Español":    
-            st.subheader("IA-lizador | CEO de CodeCodix")
+            st.subheader("IA-lizador Estratégico | CEO de CodeCodix")
         else:
-            st.subheader("AI-lizer | CEO of CodeCodix")
-
-    
+            st.subheader("Strategic AI-lizer | CEO of CodeCodix")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -98,34 +95,160 @@ def main():
         if lang == "Español":
             st.markdown("""
             ### Sobre mí
-            Soy Imanol Asolo, IA-lizador. Ayudo a empresas y proyectos a evolucionar, automatizar y escalar mediante herramientas de inteligencia artificial.
-            Lidero CodeCodix, donde creamos soluciones prácticas de IA que funcionan desde la primera semana. Transformamos hospitales, autoescuelas, barcos atuneros y más.
+            **Full Stack Developer | Scrum Master | AI & LLM Solutions Architect**
+            
+            Desarrollador Full Stack visionario y Scrum Master certificado con 7+ años de experiencia construyendo soluciones digitales de vanguardia que fusionan desarrollo web moderno con capacidades de IA y LLM. 
+            
+            Especializado en diseñar y escalar plataformas inteligentes en los sectores de salud, negocios y engagement de clientes. Reconocido por transformar desafíos complejos en soluciones escalables de alto impacto.
+            
+            📧 jjusturi@gmail.com | 📱 +593 099 351 3082
             """)
         else:
             st.markdown("""
             ### About Me
-            I'm Imanol Asolo, an AI-lizer. I help businesses and projects evolve, automate and scale through smart AI tools.
-            As CEO of CodeCodix, I lead the creation of practical AI systems that deliver value from week one. We transform hospitals, driving schools, fishing vessels and beyond.
+            **Full Stack Developer | Scrum Master | AI & LLM Solutions Architect**
+            
+            Visionary Full Stack Developer and Certified Scrum Master with 7+ years of experience building cutting-edge digital solutions that merge modern web development with AI and LLM capabilities.
+            
+            Specialized in designing and scaling intelligent platforms across healthcare, business, and customer engagement sectors. Recognized for transforming complex challenges into high-impact, scalable solutions.
+            
+            📧 jjusturi@gmail.com | 📱 +593 099 351 3082
             """)
 
+    # Core Competencies Section
+    st.write("### 🧠 Competencias Clave / Core Competencies")
     col1, col2 = st.columns(2)
     with col1:
-        services = ["Desarrollo de herramientas IA", "Consultoría tecnológica", "Gestión de proyectos"] if lang == "Español" else ["AI Tools Development", "Technology Consulting", "Project Management"]
-        st.write("### Servicios / Services")
-        for service in services:
-            st.write(f"- {service}")
-
+        if lang == "Español":
+            st.markdown("""
+            **Herramientas IA & LLM:**
+            - Prompt Engineering, LangChain
+            - GPT-4, OpenAI API, Hugging Face
+            
+            **Desarrollo Full Stack:**
+            - React, Vue, Streamlit, TypeScript
+            - Node.js, Django, FastAPI
+            
+            **Cloud & DevOps:**
+            - Docker, Kubernetes, AWS, Azure
+            """)
+        else:
+            st.markdown("""
+            **AI & LLM Tools:**
+            - Prompt Engineering, LangChain
+            - GPT-4, OpenAI API, Hugging Face
+            
+            **Full Stack Development:**
+            - React, Vue, Streamlit, TypeScript
+            - Node.js, Django, FastAPI
+            
+            **Cloud & DevOps:**
+            - Docker, Kubernetes, AWS, Azure
+            """)
+    
     with col2:
-        projects = ["AI_Medicare", "Raptor_eye", "Botarmy_Hub"]
-        st.write ('### Proyectos / Projects')
-        for project in projects:
-            st.write(f"- {project}")
+        if lang == "Español":
+            st.markdown("""
+            **Liderazgo Ágil:**
+            - Ceremonias Scrum, Coaching de Equipos
+            - Sprint Planning, Kanban, Jira
+            
+            **Automatización & Testing:**
+            - Selenium, Pytest, Unit Testing
+            
+            **Lenguajes:**
+            - Python, JavaScript, Java, C++, PHP
+            """)
+        else:
+            st.markdown("""
+            **Agile Leadership:**
+            - Scrum Ceremonies, Team Coaching
+            - Sprint Planning, Kanban, Jira
+            
+            **Automation & Testing:**
+            - Selenium, Pytest, Unit Testing
+            
+            **Languages:**
+            - Python, JavaScript, Java, C++, PHP
+            """)
+
+    # Key Projects Section
+    st.write("### 🚀 Proyectos Destacados / Key Projects")
+    col1, col2 = st.columns(2)
+    with col1:
+        if lang == "Español":
+            st.markdown("""
+            **🩺 AI Medicare Suite**
+            - Plataforma hospitalaria con IA integrada
+            - Gestión de pacientes y flujos de emergencia
+            - Agentes conversacionales con LLM
+            
+            **📇 AI Interactive Business Card**
+            - Tarjeta de presentación inteligente
+            - Chat en tiempo real y portfolio personal
+            """)
+        else:
+            st.markdown("""
+            **🩺 AI Medicare Suite**
+            - AI-integrated hospital platform
+            - Patient management & emergency workflows
+            - LLM-powered conversational agents
+            
+            **📇 AI Interactive Business Card**
+            - Smart business card with real-time chat
+            - Personal portfolio and contact features
+            """)
+    
+    with col2:
+        if lang == "Español":
+            st.markdown("""
+            **🤖 Botarmy Hub**
+            - Marketplace de asistentes virtuales
+            - Sistema de afiliados con revenue sharing
+            - Herramientas de despliegue para clientes
+            
+            **🌊 NautiAI (ERP Industria Atunera)**
+            - ERP específico para flotas pesqueras
+            - Planificación de recursos con IA
+            """)
+        else:
+            st.markdown("""
+            **🤖 Botarmy Hub**
+            - Virtual assistant marketplace
+            - Affiliate system with revenue sharing
+            - Client deployment tools
+            
+            **🌊 NautiAI (Tuna Industry ERP)**
+            - Industry-specific AI ERP tool
+            - Resource planning for fishing fleets
+            """)
+
+    # Achievements Section
+    st.write("### 🏆 Logros Clave / Key Achievements")
+    if lang == "Español":
+        achievements = [
+            "🚀 Lanzó plataforma hospitalaria con IA en Manta, Ecuador - actualmente en operaciones reales",
+            "🧠 Creó AI Business Cards con chat LLM integrado, redefiniendo el networking profesional",
+            "📈 Construyó Botarmy Hub con incentivos de reventa (50% comisiones)",
+            "📣 Desarrolló plataforma de IA para comunicación y relaciones públicas en salud",
+            "🧩 Diseñó herramientas tipo ERP para pesca, agricultura y turismo bajo el modelo AI-lización"
+        ]
+    else:
+        achievements = [
+            "🚀 Launched AI-powered hospital platform in Manta, Ecuador - currently handling real operations",
+            "🧠 Created AI Business Cards with embedded LLM chat, redefining professional networking",
+            "📈 Built Botarmy Hub with built-in reseller incentives (50% commissions)",
+            "📣 Developed AI-driven social media and PR platform for healthcare teams",
+            "🧩 Designed ERP-like tools for fishing, agriculture, and tourism under AI-lización model"
+        ]
+    
+    for achievement in achievements:
+        st.write(f"• {achievement}")
 
     st.write("### ¡Conversa conmigo! / Chat with me!")
-    st.info("Hazme una pregunta y descubre cómo puedo ayudarte | Ask me anything and see how I can help you")
+    st.info("Hazme una pregunta sobre mis proyectos, experiencia o cómo puedo ayudarte | Ask me about my projects, experience or how I can help you")
 
-
-# Cargar múltiples PDFs desde carpeta "pdfs"
+    # Load PDFs and setup conversation
     pdf_folder = os.path.join(os.getcwd(), "pdfs")
     pdf_text = ""
     for filename in os.listdir(pdf_folder):
