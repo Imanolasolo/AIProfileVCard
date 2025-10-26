@@ -1,11 +1,22 @@
 import streamlit as st
 from PyPDF2 import PdfReader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain.memory import ConversationBufferMemory
-from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import ChatOpenAI 
+try:
+    from langchain.text_splitter import CharacterTextSplitter
+    from langchain_openai import OpenAIEmbeddings
+    from langchain_community.vectorstores import FAISS
+    from langchain.memory import ConversationBufferMemory
+    from langchain.chains import ConversationalRetrievalChain
+    from langchain.chat_models import ChatOpenAI
+except ModuleNotFoundError as e:
+    # Provide a friendly Streamlit error explaining what's missing and how to fix it
+    missing = str(e)
+    st.error(
+        "A required Python package is missing: %s.\n\n" \
+        "Please install the project's dependencies (run `pip install -r requirements.txt`) " \
+        "in the environment where Streamlit runs, then restart the app." % missing
+    )
+    # Stop script execution so Streamlit shows the error and does not crash with a long traceback
+    st.stop()
 from htmlTemplates import css, bot_template, user_template
 import os
 import base64
