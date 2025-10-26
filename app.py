@@ -1,22 +1,16 @@
+import os
+# Allow duplicate OpenMP runtimes to load (workaround for Windows libomp/libiomp conflicts).
+# This is an unsafe workaround; prefer installing compatible packages or ensuring a single OpenMP runtime.
+os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+
 import streamlit as st
 from PyPDF2 import PdfReader
-try:
-    from langchain.text_splitter import CharacterTextSplitter
-    from langchain_openai import OpenAIEmbeddings
-    from langchain_community.vectorstores import FAISS
-    from langchain.memory import ConversationBufferMemory
-    from langchain.chains import ConversationalRetrievalChain
-    from langchain.chat_models import ChatOpenAI
-except ModuleNotFoundError as e:
-    # Provide a friendly Streamlit error explaining what's missing and how to fix it
-    missing = str(e)
-    st.error(
-        "A required Python package is missing: %s.\n\n" \
-        "Please install the project's dependencies (run `pip install -r requirements.txt`) " \
-        "in the environment where Streamlit runs, then restart the app." % missing
-    )
-    # Stop script execution so Streamlit shows the error and does not crash with a long traceback
-    st.stop()
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain.memory import ConversationBufferMemory
+from langchain.chains import ConversationalRetrievalChain
+from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
 import os
 import base64
@@ -35,8 +29,8 @@ def get_pdf_text(pdf_path):
 
 # Function to split the extracted text into manageable chunks for processing
 def get_text_chunks(text):
-    text_splitter = CharacterTextSplitter(
-        separator="\n",
+    text_splitter = RecursiveCharacterTextSplitter(
+        separators=["\n"],
         chunk_size=1000,
         chunk_overlap=200,
         length_function=len,
