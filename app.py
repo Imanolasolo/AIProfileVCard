@@ -117,7 +117,7 @@ def main():
     with col2:
         description = """
         ### About Me
-        I am the CEO of CodeCodix, a company dedicated to developing artificial intelligence tools. Besides leading the company, I am a proud father who loves the sea. At CodeCodix, I work as a Full Stack Developer and Scrum Master, playing multiple roles to ensure the success of our projects. My passion for technology and versatility in my skills allow me to contribute significantly to various aspects of development and team management.
+        I am the CEO of CodeCodix, a company dedicated to developing artificial intelligence tools. Besides leading the company, I am a proud father who loves the sea. At CodeCodix, I work as a Full Stack Developer and Scrum Master, playing multiple roles to ensure the success of our projects. My passion for technology and versatility in my skills allows me to contribute significantly to various aspects of development and team management.
         """
         st.markdown(description)
 
