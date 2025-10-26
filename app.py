@@ -8,7 +8,16 @@ from PyPDF2 import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain.memory import ConversationBufferMemory
+try:
+    from langchain.memory import ConversationBufferMemory
+except Exception:
+    try:
+        # some distributions may ship langchain integrations under a different package
+        from langchain_community.memory import ConversationBufferMemory
+    except Exception as e:
+        raise ImportError(
+            "ConversationBufferMemory not found. Install a compatible langchain package (e.g. add 'langchain>=0.1.0,<0.2.0' to requirements)"
+        ) from e
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
