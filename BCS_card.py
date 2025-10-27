@@ -211,7 +211,7 @@ def main():
     st.info(st.session_state['ui_texts']['info_text'])
 
     # Process the PDF file to be used as context for the chatbot
-    pdf_path = os.path.join(os.getcwd(), "imanolpdf1.pdf")
+    pdf_path = os.path.join(os.getcwd(), "pdfs/BCS_base.pdf")
     pdf_text = get_pdf_text(pdf_path)
     text_chunks = get_text_chunks(pdf_text)
     vector_store = get_vector_store(text_chunks)
