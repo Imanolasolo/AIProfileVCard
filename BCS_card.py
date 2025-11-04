@@ -35,10 +35,16 @@ english_texts = {
     'profile_caption': name,
     'description': """
 ### What we do at BCS
-BCS builds intelligent, custom core software that empowers companies to automate, scale, and evolve their business.
+BCS builds intelligent, custom core software that empowers companies to automate, scale, and evolve their business. We also act as resellers of cold wallets (secure hardware storage) and provide cryptocurrency advisory and decision-support to help organizations adopt and leverage digital assets safely.
 """,
     'services_header': '### Services Offered',
-    'services': ["AI Tools Development", "Technology Consulting", "Project Management"],
+    'services': [
+        "AI Tools Development",
+        "Technology Consulting",
+        "Project Management",
+        "Cold wallets reseller (sale & distribution)",
+        "Cryptocurrency advisory and decision-support",
+    ],
     'projects_header': '### Developed projects',
     # canonical project identifiers (do NOT translate)
     'projects': ["AI_Medicare", "Raptor_eye", "Botarmy_Hub"],
@@ -54,10 +60,16 @@ spanish_texts = {
     'profile_caption': name,
     'description': """
 ### Qué hacemos en BCS
-BCS crea un software central inteligente y personalizado que permite a las empresas automatizar, escalar y hacer evolucionar sus negocios.
+BCS crea un software central inteligente y personalizado que permite a las empresas automatizar, escalar y hacer evolucionar sus negocios. Además, actuamos como distribuidores de carteras frías (cold wallets) y ofrecemos asesoría y apoyo en la toma de decisiones con criptomonedas para ayudar a las organizaciones a adoptar y aprovechar los activos digitales de forma segura.
 """,
     'services_header': '### Servicios ofrecidos',
-    'services': ["Desarrollo de herramientas de IA", "Consultoría Tecnológica", "Gestión de proyectos"],
+    'services': [
+        "Desarrollo de herramientas de IA",
+        "Consultoría Tecnológica",
+        "Gestión de proyectos",
+        "Venta y distribución de carteras frías (cold wallets)",
+        "Asesoría y apoyo en toma de decisiones con criptomonedas",
+    ],
     'projects_header': '### Proyectos desarrollados',
     # keep original project identifiers
     'projects': ["AI_Medicare", "Raptor_eye", "Botarmy_Hub"],
