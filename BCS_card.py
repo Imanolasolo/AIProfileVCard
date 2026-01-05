@@ -6,20 +6,10 @@ os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
-try:
-    from langchain.memory import ConversationBufferMemory
-except Exception:
-    try:
-        # some distributions may ship langchain integrations under a different package
-        from langchain_community.memory import ConversationBufferMemory
-    except Exception as e:
-        raise ImportError(
-            "ConversationBufferMemory not found. Install a compatible langchain package (e.g. add 'langchain>=0.1.0,<0.2.0' to requirements)"
-        ) from e
+from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
 import os
 import base64
@@ -47,7 +37,7 @@ BCS builds intelligent, custom core software that empowers companies to automate
     ],
     'projects_header': '### Developed projects',
     # canonical project identifiers (do NOT translate)
-    'projects': ["AI_Medicare", "Raptor_eye", "Botarmy_Hub"],
+    'projects': ["BCS_BlackBox", "AI_Medicare", "Raptor_eye", "Botarmy_Hub"],
     'section_prompt': "### Tell us about your projects and let´s discover how can we work together!",
     'info_text': "Doesn´t matter the language, ask anything you need!",
     'input_placeholder': "How we can help you today?",
@@ -72,7 +62,7 @@ BCS crea un software central inteligente y personalizado que permite a las empre
     ],
     'projects_header': '### Proyectos desarrollados',
     # keep original project identifiers
-    'projects': ["AI_Medicare", "Raptor_eye", "Botarmy_Hub"],
+    'projects': ["BCS_BlackBox", "AI_Medicare", "Raptor_eye", "Botarmy_Hub"],
     'section_prompt': '¡Cuéntanos tus proyectos y descubramos cómo podemos trabajar juntos!',
     'info_text': '¡No importa el idioma, pregunta lo que necesites!',
     'input_placeholder': '¿Cómo podemos ayudarte hoy?',
@@ -117,15 +107,18 @@ def get_conversation_chain(vector_store):
 
 # Function to handle user input and generate responses
 def handle_user_input(user_question):
-    response = st.session_state.conversation({'question': user_question})
-    st.session_state.chat_history = response['chat_history']
+    try:
+        response = st.session_state.conversation({'question': user_question})
+        st.session_state.chat_history = response['chat_history']
 
-    # Display the conversation history
-    for i, msg in enumerate(st.session_state.chat_history):
-        if i % 2 == 0:
-            st.write(user_template.replace("{{MSG}}", msg.content), unsafe_allow_html=True)
-        else:
-            st.write(bot_template.replace("{{MSG}}", msg.content), unsafe_allow_html=True)
+        # Display the conversation history
+        for i, msg in enumerate(st.session_state.chat_history):
+            if i % 2 == 0:
+                st.write(user_template.replace("{{MSG}}", msg.content), unsafe_allow_html=True)
+            else:
+                st.write(bot_template.replace("{{MSG}}", msg.content), unsafe_allow_html=True)
+    except Exception as e:
+        st.error(f"Error processing your question: {str(e)}")
 
 # Main function to run the Streamlit app
 def main():
@@ -222,21 +215,38 @@ def main():
     st.write(st.session_state['ui_texts']['section_prompt'])
     st.info(st.session_state['ui_texts']['info_text'])
 
-    # Process the PDF file to be used as context for the chatbot
-    pdf_path = os.path.join(os.getcwd(), "pdfs/BCS_base.pdf")
-    pdf_text = get_pdf_text(pdf_path)
-    text_chunks = get_text_chunks(pdf_text)
-    vector_store = get_vector_store(text_chunks)
-    conversation_chain = get_conversation_chain(vector_store)
-
-    # Store the conversation chain and history in session state
-    st.session_state.conversation = conversation_chain
-    st.session_state.chat_history = []
+    # Initialize conversation chain only once
+    if 'conversation' not in st.session_state:
+        try:
+            # Process the PDF file to be used as context for the chatbot
+            pdf_path = os.path.join(os.getcwd(), "pdfs/BCS_base.pdf")
+            
+            if not os.path.exists(pdf_path):
+                st.error(f"PDF file not found at: {pdf_path}")
+                st.session_state.conversation = None
+            else:
+                pdf_text = get_pdf_text(pdf_path)
+                text_chunks = get_text_chunks(pdf_text)
+                vector_store = get_vector_store(text_chunks)
+                conversation_chain = get_conversation_chain(vector_store)
+                
+                # Store the conversation chain in session state
+                st.session_state.conversation = conversation_chain
+                st.session_state.chat_history = []
+        except Exception as e:
+            st.error(f"Error initializing conversation system: {str(e)}")
+            st.session_state.conversation = None
+    
+    if 'chat_history' not in st.session_state:
+        st.session_state.chat_history = []
 
     # Input box for user questions
     user_question = st.text_input(st.session_state['ui_texts']['input_placeholder'])
     if user_question:
-        handle_user_input(user_question)
+        if st.session_state.conversation is None:
+            st.warning("⚠️ The conversation system is not available. Please check the configuration.")
+        else:
+            handle_user_input(user_question)
 
 
 def translate_all(target_lang: str):
