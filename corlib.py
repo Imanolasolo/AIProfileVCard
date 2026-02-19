@@ -303,7 +303,7 @@ def main():
     # Display the profile picture and description in two columns
     col1, col2 = st.columns(2)
     with col1:
-        st.image('juguetes.jpeg', caption=lang['picture_caption'], width=400)
+        st.image('juguetes.jpeg', caption=lang['picture_caption'], width=300)
     with col2:
         st.markdown(lang['about_me_title'])
         st.markdown(lang['about_me_text'])
